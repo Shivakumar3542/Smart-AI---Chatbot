@@ -18,12 +18,12 @@ st.set_page_config(page_title="Smartbot Assistant", page_icon="🤖", layout="wi
 # Title Section with styling
 st.markdown("""
     <h1 style="font-family: 'Arial', sans-serif; color: #2E8B57; text-align: center;">
-        Welcome to Smartbot - Your Smart Assistant
+        Ellie - Your Smart Companion
     </h1>
 """, unsafe_allow_html=True)
 
 # Display AI greeting at the top
-st.chat_message("ai").write("Hello! I'm Friday, your smart AI assistant. How can I assist you today?")
+st.chat_message("ai").write("Hi! I’m Ellie, your smart assistant. How can I assist you today?")
 
 # Sidebar - Chat history
 with st.sidebar:
