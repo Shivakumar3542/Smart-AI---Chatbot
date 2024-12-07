@@ -7,7 +7,7 @@ genai.configure(api_key="AIzaSyAdRw5RBVvuch-aYoXa0aOS3NHYOKPrJ1Q")
 llm = genai.GenerativeModel("models/gemini-1.5-flash")
 
 # Load and display the image
-image = Image.open("evaaa.png")
+image = Image.open("evaa.png")
 
 # Initialize chat history and model
 if "chat_history" not in st.session_state:
