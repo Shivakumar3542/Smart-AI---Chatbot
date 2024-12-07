@@ -12,10 +12,7 @@ if "chat_history" not in st.session_state:
 
 chatbot = llm.start_chat(history=[])
 
-# Load and display the image (assuming the image path is correct)
-#image = Image.open("Friday.png")
-
-# Set up page layout with title and image
+# Set up page layout with title
 st.set_page_config(page_title="Smartbot Assistant", page_icon="🤖", layout="wide")
 
 # Title Section with styling
@@ -25,38 +22,29 @@ st.markdown("""
     </h1>
 """, unsafe_allow_html=True)
 
-# Display image on top
-#st.image(image, use_column_width=True)
-
-# Greeting message displayed at the top
-st.markdown("""
-    <div style="font-size: 18px; font-family: 'Arial', sans-serif; color: #555555; text-align: center;">
-        Hello! I'm Friday, your smart AI assistant. How can I assist you today?
-    </div>
-""", unsafe_allow_html=True)
-
-# Chat message input field
-human_prompt = st.text_input("Ask me anything...")
+# Display AI greeting at the top
+st.chat_message("ai").write("Hello! I'm Friday, your smart AI assistant. How can I assist you today?")
 
 # Sidebar - Chat history
 with st.sidebar:
     st.title("Chat History")
     if st.session_state.chat_history:
-        for idx, (role, text) in enumerate(st.session_state.chat_history):
-            message = f"**{role.capitalize()}**: {text}"
-            st.write(f"{idx + 1}. {message}")
+        for i, (role, text) in enumerate(st.session_state.chat_history):
+            st.write(f"**{i + 1}. {role.capitalize()}**: {text}")
+
+# Chat message input field
+human_prompt = st.chat_input("Ask me anything...")
 
 # Process user input and generate AI response
 if human_prompt:
-    # Append human message to history
+    # Append user message to chat history
     st.session_state.chat_history.append(("human", human_prompt))
-    st.markdown(f"**You**: {human_prompt}")
+    st.chat_message("human").write(human_prompt)
 
     # Generate AI response
     response = chatbot.send_message(human_prompt)
     ai_response = response.text
 
-    # Append AI response to history and display
+    # Append AI message to chat history
     st.session_state.chat_history.append(("ai", ai_response))
-    st.markdown(f"**AI**: {ai_response}")
-
+    st.chat_message("ai").write(ai_response)
