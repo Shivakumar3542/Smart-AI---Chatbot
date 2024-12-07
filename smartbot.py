@@ -6,6 +6,9 @@ from PIL import Image
 genai.configure(api_key="AIzaSyAdRw5RBVvuch-aYoXa0aOS3NHYOKPrJ1Q")
 llm = genai.GenerativeModel("models/gemini-1.5-flash")
 
+# Load and display the image
+image = Image.open("evaaa.png")
+
 # Initialize chat history and model
 if "chat_history" not in st.session_state:
     st.session_state.chat_history = []
@@ -18,12 +21,13 @@ st.set_page_config(page_title="Smartbot Assistant", page_icon="🤖", layout="wi
 # Title Section with styling
 st.markdown("""
     <h1 style="font-family: 'Arial', sans-serif; color: #2E8B57; text-align: center;">
-        Ellie - Your Smart Companion
+        Eva - Your Smart Companion
     </h1>
 """, unsafe_allow_html=True)
 
 # Display AI greeting at the top
-st.chat_message("ai").write("Hi! I’m Ellie, your smart assistant. How can I assist you today?")
+# st.chat_message("ai").write("Hi! I’m Ellie, your smart assistant. How can I assist you today?")
+st.image(image)
 
 # Sidebar - Chat history
 with st.sidebar:
