@@ -53,10 +53,22 @@ if human_prompt:
     st.session_state.chat_history.append(("ai", ai_response))
     st.chat_message("ai").write(ai_response)
     
-    if st.button("Export Chat History"):
+if st.button("Export Chat History"):
+    if st.session_state.chat_history:
+        # Write the chat history to a text file
         with open("chat_history.txt", "w") as file:
             for role, text in st.session_state.chat_history:
                 file.write(f"{role.capitalize()}: {text}\n")
+        # Notify user of successful export
         st.success("Chat history exported successfully!")
-
-
+        
+        # Provide a download button for the exported file
+        with open("chat_history.txt", "rb") as file:
+            st.download_button(
+                label="Download Chat History",
+                data=file,
+                file_name="chat_history.txt",
+                mime="text/plain"
+            )
+    else:
+        st.warning("No chat history to export!")
