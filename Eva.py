@@ -52,3 +52,11 @@ if human_prompt:
     # Append AI message to chat history
     st.session_state.chat_history.append(("ai", ai_response))
     st.chat_message("ai").write(ai_response)
+    
+    if st.button("Export Chat History"):
+        with open("chat_history.txt", "w") as file:
+            for role, text in st.session_state.chat_history:
+                file.write(f"{role.capitalize()}: {text}\n")
+        st.success("Chat history exported successfully!")
+
+
